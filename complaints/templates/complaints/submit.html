@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-6 bg-white rounded shadow-md">
+<h2 class="text-2xl font-bold mb-4">Submit a Complaint</h2>
+
+{% if messages %}
+  <ul class="mb-4">
+    {% for message in messages %}
+      <li class="text-green-700 font-medium">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data" class="space-y-4">
+  {% csrf_token %}
+
+  <!-- Name -->
+  <div>
+    <label for="id_name" class="block text-sm font-medium text-gray-700">Full Name</label>
+    {{ form.name|add_class:"mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" }}
+    {% if form.name.errors %}
+      <p class="text-red-600 text-sm">{{ form.name.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label for="id_email" class="block text-sm font-medium text-gray-700">Email</label>
+    {{ form.email|add_class:"mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" }}
+    {% if form.email.errors %}
+      <p class="text-red-600 text-sm">{{ form.email.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Category -->
+  <div>
+    <label for="id_category" class="block text-sm font-medium text-gray-700">Category</label>
+    {{ form.category|add_class:"mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" }}
+    {% if form.category.errors %}
+      <p class="text-red-600 text-sm">{{ form.category.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label for="id_description" class="block text-sm font-medium text-gray-700">Description</label>
+    {{ form.description|add_class:"mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" }}
+    {% if form.description.errors %}
+      <p class="text-red-600 text-sm">{{ form.description.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Location -->
+  <div>
+    <label for="id_location" class="block text-sm font-medium text-gray-700">Location</label>
+    {{ form.location|add_class:"mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" }}
+    {% if form.location.errors %}
+      <p class="text-red-600 text-sm">{{ form.location.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Image Upload (Attachment) -->
+  <div>
+    <label for="id_image" class="block text-sm font-medium text-gray-700">Attachment (Image)</label>
+    {{ form.image|add_class:"mt-1 block w-full" }}
+    {% if form.image.errors %}
+      <p class="text-red-600 text-sm">{{ form.image.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Submit -->
+  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    Submit
+  </button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-10">
+  <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Contact Us</h2>
+  <p class="text-center text-gray-600 mb-8">
+    If you have any questions, suggestions, or issues, feel free to reach out.
+  </p>
+
+  <div class="bg-white p-6 rounded-xl shadow border">
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label class="block text-gray-700">Name</label>
+        <input type="text" name="name" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Email</label>
+        <input type="email" name="email" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Message</label>
+        <textarea name="message" rows="5" class="w-full p-2 border rounded" required></textarea>
+      </div>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Send Message</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

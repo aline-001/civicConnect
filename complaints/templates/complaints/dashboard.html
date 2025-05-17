@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Admin Dashboard</h2>
+
+<table class="table-auto w-full border border-gray-300 text-sm">
+  <thead class="bg-gray-100">
+    <tr>
+      <th class="p-2 border">Name</th>
+      <th class="p-2 border">Email</th>
+      <th class="p-2 border">Category</th>
+      <th class="p-2 border">Location</th>
+      <th class="p-2 border">Description</th>
+      <th class="p-2 border">Status</th>
+      <th class="p-2 border">Assigned Agency</th>
+      <th class="p-2 border">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in complaints %}
+    <tr class="hover:bg-gray-50">
+      <td class="p-2 border">{{ c.name|default:"Anonymous" }}</td>
+      <td class="p-2 border">{{ c.email }}</td>
+      <td class="p-2 border capitalize">{{ c.category }}</td>
+      <td class="p-2 border">{{ c.location }}</td>
+      <td class="p-2 border">{{ c.description|truncatewords:10 }}</td>
+      <td class="p-2 border">{{ c.status }}</td>
+      <td class="p-2 border">
+        {{ c.assigned_agency.name|default:"Not assigned" }}
+      </td>
+<td class="p-2 border">
+  <div class="flex space-x-2">
+    <a href="{% url 'respond_to_complaint' c.id %}" class="inline-block bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+      Respond
+    </a>
+    
+    <a href="{% url 'delete_complaint' c.id %}" class="inline-block bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+      Delete
+    </a>
+  </div>
+</td>
+
+
+
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="8" class="text-center p-4 text-gray-500">No complaints submitted yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CivicConnect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<nav class="bg-gray-100 border-b shadow-md px-4 py-3 flex justify-between items-center">
+  <div class="text-xl text-blue-500 font-bold">
+    <a href="{% url 'home' %}">CivicConnect</a>
+  </div>
+
+  <div class="md:hidden">
+    <button id="menu-toggle" class="focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+ 
+  <div id="menu" class="hidden font-semibold text-blue-400 text-blue-400 md:flex flex-col md:flex-row md:items-center w-full md:w-auto">
+    <a href="{% url 'home' %}" class="block md:inline-block px-3 py-2 hover:blue-600">Home</a>
+    <a href="{% url 'submit_complaint' %}" class="block md:inline-block px-3 py-2 hover:blue-600">Submit Complaint</a>
+    <a href="{% url 'track_complaint' %}" class="block md:inline-block px-3 py-2 hover:blue-600">Track</a>
+    <a href="{% url 'admin_dashboard' %}" class="block md:inline-block px-3 py-2 hover:blue-600">Dashboard</a>
+  </div>
+</nav>
+
+
+  <main class="max-w-4xl mx-auto p-6 mt-4 bg-white rounded shadow">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="bg-green-100 text-green-800 p-3 rounded mb-4">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="bg-gray-100 text-gray-700 py-6 mt-10 border-t">
+  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-center md:text-left">
+    
+
+    
+    <div>
+      <h4 class="font-semibold mb-2">Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'home' %}" class="hover:text-blue-500">Home</a></li>
+        <li><a href="{% url 'about' %}" class="hover:text-blue-500">About</a></li>
+        <li><a href="{% url 'services' %}" class="hover:text-blue-500">Services</a></li>
+        <li><a href="{% url 'contact' %}" class="hover:text-blue-500">Contact</a></li>
+        <li><a href="{% url 'privacy_policy' %}" class="hover:text-blue-500">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    
+    <div>
+      <h4 class="font-semibold mb-2">Contact Information</h4>
+      <p>Email: info@civicconnect.gov.rw</p>
+      <p>Phone: +250 788 123 456</p>
+      <p>Location: Kigali, Rwanda</p>
+    </div>
+
+  </div>
+  <div class="mt-6 border-t pt-4 text-center text-xs text-gray-500">
+    &copy; {{ now|date:"Y" }} CivicConnect. A service of the Ministry of Local Government, Republic of Rwanda.
+  </div>
+</footer>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

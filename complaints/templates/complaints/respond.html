@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="max-w-xl mx-auto p-6 bg-white rounded shadow-md">
+<h2 class="text-xl font-semibold mb-4">Respond to Complaint</h2>
+<p class="mb-4"><strong>Description:</strong> {{ complaint.description }}</p>
+<form method="post" class="space-y-4">
+  {% csrf_token %}
+
+  <div>
+    <label for="id_comment" class="block text-sm font-medium text-gray-700">Comment</label>
+    {{ form.comment|add_class:"mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" }}
+  </div>
+
+  <div>
+    <label for="id_updated_status" class="block text-sm font-medium text-gray-700">Updated Status</label>
+    {{ form.updated_status|add_class:"mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2" }}
+  </div>
+
+  <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+    Submit Response
+  </button>
+</form>
+</div>
+{% endblock %}
